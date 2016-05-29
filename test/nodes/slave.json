@@ -6,6 +6,7 @@
   "run_list": ["role[Server]", "role[NS-slave]"],
   "automatic": {
     "ipaddress": "192.168.100.20",
+    "ip6address": "2001:4860:4860::8844",
     "hostname": "slave",
     "fqdn": "slave"
   }

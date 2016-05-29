@@ -6,6 +6,7 @@
   "run_list": ["role[Server]", "role[NS-master]"],
   "automatic": {
     "ipaddress": "192.168.100.10",
+    "ip6address": "2001:4860:4860::8888",
     "hostname": "master",
     "fqdn": "master"
   }
