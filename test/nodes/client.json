@@ -6,6 +6,7 @@
   "run_list": ["role[Server]"],
   "automatic": {
     "ipaddress": "192.168.100.30",
+    "ip6address": "2001:4860:4860::8844",
     "hostname": "client",
     "fqdn": "client"
   }
