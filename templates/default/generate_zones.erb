@@ -1,6 +1,6 @@
 $TTL    <%= @zone['globals']['ttl'] %>
 @       IN      SOA     <%= @zone['globals']['soa'] %>. <%= @zone['globals']['contact'] %>. (
-                        <%= Time.now.to_i %>      ; Serial
+                        <%= Time.now.to_i %>   ; Serial
                             300         ; Refresh
                              60         ; Retry
                          121000         ; Expire
@@ -11,18 +11,22 @@ $TTL    <%= @zone['globals']['ttl'] %>
 @    IN      NS      <%= ns %>.
 <% end %>
 
-<% @zone['records'].each do |rr| %>
-<% if /\b((C|D)NAME)/i.match(rr['type']) %>
-<%= rr['hostname'] %> <%= rr['ttl'].nil? ? "" : rr['ttl'] %> IN <%= rr['type'].upcase %> <%= rr['value'] + '.' %>
-<% elsif /\b(MX)/i.match(rr['type']) %>
-<%= rr['hostname'] %> <%= rr['ttl'].nil? ? "" : rr['ttl'] %> IN <%= rr['type'].upcase %> <%= rr['weight'] %> <%= rr['value'] + '.' %>
-<% elsif /\b(SRV)/i.match(rr['type']) %>
-<%= rr['hostname'] %> <%= rr['ttl'].nil? ? "" : rr['ttl'] %> IN <%= rr['type'].upcase %> <%= rr['priority'] %> <%= rr['weight'] %> <%= rr['port'] %> <%= rr['value'] + '.' %>
-<% elsif /\b(TXT)/i.match(rr['type']) %>
-<%= rr['hostname'] %> <%= rr['ttl'].nil? ? "" : rr['ttl'] %> IN <%= rr['type'].upcase %> <%= '"' + rr['value'] + '"' %>
-<% elsif /\b(A|AAAA)/i.match(rr['type']) %>
-<%= rr['hostname'] %> <%= rr['ttl'].nil? ? "" : rr['ttl'] %> IN <%= rr['type'].upcase %> <%= rr['value'] %>
-<% else %>
-<% log("Unsupported or malformed record type at #{rr}") %>
-<% end %>
+<% @zone['records'].each do |rr|
+  longest_key = rr.keys.max_by(&:length)
+
+  if /\b((C|D)NAME)/i.match(rr['type'])
+    record = sprintf("%-#{longest_key.length}s\t%-4s\tIN\t%-24s\t%s\n", rr['hostname'], rr['ttl'], rr['type'].upcase, rr['value'] + ".")
+  elsif /\b(MX)/i.match(rr['type'])
+    record = sprintf("%-#{longest_key.length}s\t%-4s\tIN\t%-8s\t%-8s\t%s\n", rr['hostname'], rr['ttl'], rr['type'].upcase, rr['weight'], rr['value'] + ".")
+  elsif /\b(SRV)/i.match(rr['type'])
+    record = sprintf("%-#{longest_key.length}s\t%-4s\tIN\t%-4s\t%-2s\t%-2s\t%-2s\t%s\n", rr['hostname'], rr['ttl'], rr['type'].upcase, rr['priority'], rr['weight'], rr['port'], rr['value'] + ".")
+  elsif /\b(TXT)/i.match(rr['type'])
+    record = sprintf("%-#{longest_key.length}s\t%-4s\tIN\t%-24s\t%s\n", rr['hostname'], rr['ttl'], rr['type'].upcase, '"' + rr['value'] + '"')
+  elsif /\b(A|AAAA)/i.match(rr['type'])
+    record = sprintf("%-#{longest_key.length}s\t%-4s\tIN\t%-24s\t%s\n", rr['hostname'], rr['ttl'], rr['type'].upcase, rr['value'])
+  else
+    log("Unsupported or malformed record type at #{rr}")
+  end
+%>
+<%= record -%>
 <% end %>

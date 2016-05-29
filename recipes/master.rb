@@ -12,12 +12,18 @@ zones.each do |item|
   # Auto populate zone with hosts based on roles
   unless zone['roles'].nil? || zone['roles'] == ''
     zone['roles'].each do |role|
-      search('node', "role:#{role}", :filter_result => { 'hostname' => ['hostname'], 'ipaddress' => ['ipaddress'] }).each do |host|
-        next if host['ipaddress'] == '' || host['ipaddress'].nil?
+      search('node', "role:#{role}", :filter_result => { 'hostname' => ['hostname'], 'ipaddress' => ['ipaddress'], 'ip6address' => ['ip6address'] }).each do |host|
+        next if host['ipaddress'].nil? || host['ipaddress'] == ''
         zone['records'].push( {
           "hostname" => host['hostname'],
           "type" => "A",
           "value" => host['ipaddress']
+        })
+        next if host['ip6address'].nil? || host['ip6address'] == ''
+        zone['records'].push( {
+          "hostname" => host['hostname'],
+          "type" => "AAAA",
+          "value" => host['ip6address']
         })
       end
     end
