@@ -1,0 +1,88 @@
+{
+  "id": "integrationtesting",
+  "fqdn": "integrationtesting.local",
+  "globals": {
+    "ttl": "300",
+    "soa": "ns1.integrationtesting.local",
+    "contact": "abuse.integrationtesting.local",
+    "nameservers": [
+      "ns1.integrationtesting.local",
+      "ns2.integrationtesting.local"
+    ]
+  },
+  "records": [
+    {
+      "hostname": "ns1",
+      "type": "A",
+      "ttl": "600",
+      "value": "192.168.100.10"
+    },
+    {
+      "hostname": "ns2",
+      "type": "A",
+      "ttl": "600",
+      "value": "192.168.100.20"
+    },
+    {
+      "hostname": "foo",
+      "type": "A",
+      "value": "127.0.0.1"
+    },
+    {
+      "hostname": "bar",
+      "type": "A",
+      "ttl": "60",
+      "value": "127.0.2.1"
+    },
+    {
+      "hostname": "zoo",
+      "type": "CNAME",
+      "ttl": "60",
+      "value": "foobar.com"
+    },
+    {
+      "hostname": "loo",
+      "type": "DNAME",
+      "ttl": "60",
+      "value": "foobar.com"
+    },
+    {
+      "hostname": "boo",
+      "type": "TXT",
+      "ttl": "100",
+      "value": "a TXT string"
+    },
+    {
+      "hostname": "mail",
+      "type": "MX",
+      "ttl": "100",
+      "value": "mx1.integrationtesting.local"
+    },
+    {
+      "hostname": "mail",
+      "type": "MX",
+      "ttl": "100",
+      "weight": "20",
+      "value": "mx2.integrationtesting.local"
+    },
+    {
+      "hostname": "_ldap._tcp",
+      "type": "SRV",
+      "ttl": "100",
+      "weight": "10",
+      "priority": "0",
+      "port": "389",
+      "value": "ldap.integrationtesting.local"
+    },
+    {
+      "hostname": "_ldaps._tcp",
+      "type": "SRV",
+      "ttl": "100",
+      "weight": "10",
+      "priority": "10",
+      "port": "686",
+      "value": "ldap.integrationtesting.local"
+    }
+  ],
+  "roles": ["Server"]
+}

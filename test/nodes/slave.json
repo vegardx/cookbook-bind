@@ -1,0 +1,12 @@
+{
+  "name": "slave",
+  "chef_type": "node",
+  "json_class": "Chef::Node",
+  "chef_environment": "_default",
+  "run_list": ["role[Server]", "role[NS-slave]"],
+  "automatic": {
+    "ipaddress": "192.168.100.20",
+    "hostname": "slave",
+    "fqdn": "slave"
+  }
+}

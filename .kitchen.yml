@@ -1,0 +1,28 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+  nodes_path: test/nodes
+  roles_path: test/roles
+  data_bags_path: test/data_bags
+
+platforms:
+  - name: debian-8.4
+
+suites:
+  - name: master
+    run_list:
+      - recipe[chef-sugar::default]
+      - role[NS-master]
+    driver:
+      network:
+        - ["private_network", {ip: "192.168.100.10"}]
+  - name: slave
+    run_list:
+      - recipe[chef-sugar::default]
+      - role[NS-slave]
+    driver:
+      network:
+        - ["private_network", {ip: "192.168.100.20"}]

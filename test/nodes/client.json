@@ -1,0 +1,12 @@
+{
+  "name": "client",
+  "chef_type": "node",
+  "json_class": "Chef::Node",
+  "chef_environment": "_default",
+  "run_list": ["role[Server]"],
+  "automatic": {
+    "ipaddress": "192.168.100.30",
+    "hostname": "client",
+    "fqdn": "client"
+  }
+}

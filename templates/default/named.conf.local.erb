@@ -1,0 +1,13 @@
+<% @zones.each do |zone| %>
+zone "<%= zone['fqdn'] %>." {
+    file "/etc/bind/db.<%= zone['fqdn'] %>";
+<% if node.roles.include?('NS-master') %>
+    type master;
+    allow-transfer { <% @peers.each do |peer| %><%= peer['ipaddress'] %>; <% end %> };
+<% else %>
+    type slave;
+    masters { <% @peers.each do |peer| %><%= peer['ipaddress'] %>; <% end %> };
+    allow-notify { <% @peers.each do |peer| %><%= peer['ipaddress'] %>; <% end %> };
+<% end %>
+};
+<% end %>
