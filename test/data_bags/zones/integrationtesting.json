@@ -14,13 +14,13 @@
     {
       "hostname": "ns1",
       "type": "A",
-      "ttl": "600",
+      "ttl": "300",
       "value": "192.168.100.10"
     },
     {
       "hostname": "ns2",
       "type": "A",
-      "ttl": "600",
+      "ttl": "300",
       "value": "192.168.100.20"
     },
     {
@@ -37,7 +37,6 @@
     {
       "hostname": "zoo",
       "type": "CNAME",
-      "ttl": "60",
       "value": "foobar.com"
     },
     {
@@ -56,6 +55,7 @@
       "hostname": "mail",
       "type": "MX",
       "ttl": "100",
+      "weight": "10",
       "value": "mx1.integrationtesting.local"
     },
     {
