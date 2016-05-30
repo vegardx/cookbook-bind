@@ -1,5 +1,5 @@
 {
-  "name": "slave",
+  "name": "ns-bar",
   "chef_type": "node",
   "json_class": "Chef::Node",
   "chef_environment": "_default",
@@ -7,7 +7,7 @@
   "automatic": {
     "ipaddress": "192.168.100.20",
     "ip6address": "2001:4860:4860::8844",
-    "hostname": "slave",
-    "fqdn": "slave"
+    "hostname": "ns-bar",
+    "fqdn": "ns-bar.integrationtesting.local"
   }
 }
