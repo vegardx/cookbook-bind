@@ -17,12 +17,17 @@ suites:
       - recipe[chef-sugar::default]
       - role[NS-master]
     driver:
+      vm_hostname: ns-foo
       network:
         - ["private_network", {ip: "192.168.100.10"}]
+        - ["private_network", {ip: "fe80::1:10"}]
+
   - name: slave
     run_list:
       - recipe[chef-sugar::default]
       - role[NS-slave]
     driver:
+      vm_hostname: ns-bar
       network:
         - ["private_network", {ip: "192.168.100.20"}]
+        - ["private_network", {ip: "fe80::1:20"}]
