@@ -28,7 +28,7 @@ Supported record types:
 
 ## TODO
 
-- A lot more testing
+- A lot more testing, only basic zone testing implemented
 - Add support for DNSSEC (might involve some manual steps)
 - ACLs
   - Recursive name servers

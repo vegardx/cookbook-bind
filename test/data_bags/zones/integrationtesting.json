@@ -2,27 +2,15 @@
   "id": "integrationtesting",
   "fqdn": "integrationtesting.local",
   "globals": {
-    "ttl": "300",
-    "soa": "ns1.integrationtesting.local",
+    "ttl": "600",
+    "soa": "ns-foo.integrationtesting.local",
     "contact": "abuse.integrationtesting.local",
     "nameservers": [
-      "ns1.integrationtesting.local",
-      "ns2.integrationtesting.local"
+      "ns-foo.integrationtesting.local",
+      "ns-bar.integrationtesting.local"
     ]
   },
   "records": [
-    {
-      "hostname": "ns1",
-      "type": "A",
-      "ttl": "300",
-      "value": "192.168.100.10"
-    },
-    {
-      "hostname": "ns2",
-      "type": "A",
-      "ttl": "300",
-      "value": "192.168.100.20"
-    },
     {
       "hostname": "foo",
       "type": "A",
